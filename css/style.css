@@ -105,8 +105,7 @@ main { position: relative; z-index: 1; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: clamp(3rem, 12vh, 7rem);
+  justify-content: center;
   pointer-events: none;
   text-align: center;
 }
@@ -120,10 +119,17 @@ main { position: relative; z-index: 1; }
   position: relative;
 }
 .logo-bit { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
-.logo-chem {
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 28px rgba(255,255,255,0.4);
+
+/* alternating neon colours across the letters of "Chemistry" */
+.logo-chem span {
+  color: currentColor;
+  text-shadow: 0 0 10px currentColor, 0 0 26px currentColor;
 }
+.logo-chem span:nth-child(5n + 1) { color: var(--cyan); }
+.logo-chem span:nth-child(5n + 2) { color: var(--magenta); }
+.logo-chem span:nth-child(5n + 3) { color: var(--green-bright); }
+.logo-chem span:nth-child(5n + 4) { color: var(--purple); }
+.logo-chem span:nth-child(5n + 5) { color: var(--lavender); }
 
 /* glitch clones */
 .logo[data-glitch]::before,
@@ -154,7 +160,8 @@ main { position: relative; z-index: 1; }
 .tagline {
   margin-top: 1.4rem;
   font-size: clamp(0.8rem, 2.2vw, 1.1rem);
-  color: var(--cyan-soft);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
   min-height: 1.4em;
   letter-spacing: 0.04em;
 }
@@ -417,6 +424,90 @@ main { position: relative; z-index: 1; }
   border: 2px solid var(--magenta);
   box-shadow: 0 0 14px rgba(255, 94, 230, 0.5);
 }
+/* ----- scheduler / calendar shown after "yes" ----- */
+.scheduler {
+  margin-top: 2.2rem;
+  width: min(440px, 90%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.scheduler-title {
+  font-size: clamp(1rem, 2.6vw, 1.4rem);
+  font-weight: 800;
+  color: var(--green-bright);
+  text-shadow: 0 0 16px rgba(52, 255, 176, 0.7);
+}
+.scheduler-fields {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 150px;
+  text-align: left;
+}
+.field span {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--cyan-soft);
+}
+.field input {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--cyan);
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  box-shadow: inset 0 0 12px rgba(34, 211, 238, 0.15);
+  color-scheme: dark;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--green-bright);
+  box-shadow: 0 0 16px rgba(52, 255, 176, 0.5), inset 0 0 12px rgba(52, 255, 176, 0.2);
+}
+.scheduler-confirm {
+  min-height: 1.5em;
+  font-size: clamp(0.95rem, 2.4vw, 1.25rem);
+  font-weight: 700;
+  color: var(--green-bright);
+  text-shadow: 0 0 16px rgba(52, 255, 176, 0.7);
+}
+
+/* ----- gif + "i cant wait" shown once date is set ----- */
+.date-set {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 0.6rem;
+}
+.date-set-gif {
+  width: min(320px, 80%);
+  border-radius: 14px;
+  border: 2px solid var(--magenta);
+  box-shadow: 0 0 22px rgba(255, 94, 230, 0.6);
+}
+.cant-wait {
+  font-size: clamp(1.3rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--magenta);
+  text-shadow: 0 0 18px rgba(255, 94, 230, 0.8);
+  letter-spacing: 0.02em;
+}
+
 .decision-result {
   margin-top: 2rem;
   min-height: 1.6em;

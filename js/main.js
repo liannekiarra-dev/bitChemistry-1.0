@@ -140,7 +140,6 @@
 
   const btnNo = document.getElementById("btn-no");
   const btnYes = document.getElementById("btn-yes");
-  const decisionResult = document.getElementById("decision-result");
 
   const NO_LABELS = [
     "no",
@@ -188,17 +187,63 @@
     dodge();
   });
 
+  const scheduler = document.getElementById("scheduler");
+  const dateInput = document.getElementById("date-input");
+  const timeInput = document.getElementById("time-input");
+  const schedulerConfirm = document.getElementById("scheduler-confirm");
+
+  // default the date to today, time to 19:00
+  const today = new Date();
+  dateInput.min = today.toISOString().split("T")[0];
+  dateInput.value = today.toISOString().split("T")[0];
+  timeInput.value = "19:00";
+
   btnYes.addEventListener("click", () => {
-    decisionResult.textContent = "⚡ it's a match! scroll up and randomize your date 💘";
+    if (!scheduler.hidden) return;
+    // reveal the calendar / date + time picker
+    scheduler.hidden = false;
     gsap.fromTo(
-      decisionResult,
-      { scale: 0, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2.2)" }
+      scheduler,
+      { opacity: 0, y: 24, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.8)" }
     );
     gsap.to(btnYes, { scale: "+=0.25", duration: 0.25, yoyo: true, repeat: 1, ease: "power2.out" });
     // hide the (tiny, defeated) "no" button
     gsap.to(btnNo, { opacity: 0, scale: 0, duration: 0.4, ease: "power2.in" });
     logo && logo.classList.add("glitching");
     setTimeout(() => logo && logo.classList.remove("glitching"), 400);
+  });
+
+  const btnConfirm = document.getElementById("btn-confirm");
+  btnConfirm.addEventListener("click", () => {
+    if (!dateInput.value || !timeInput.value) {
+      schedulerConfirm.textContent = "pick a date and time first 💫";
+      gsap.fromTo(schedulerConfirm, { x: -8 }, { x: 0, duration: 0.3, ease: "elastic.out(1,0.4)" });
+      return;
+    }
+    const when = new Date(dateInput.value + "T" + timeInput.value);
+    const pretty = when.toLocaleString(undefined, {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    schedulerConfirm.textContent = "⚡ date locked in for " + pretty + " 💘";
+    gsap.fromTo(
+      schedulerConfirm,
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2.2)" }
+    );
+    gsap.to(btnConfirm, { scale: "+=0.15", duration: 0.2, yoyo: true, repeat: 1 });
+
+    // reveal the excited gif + "i cant wait"
+    const dateSet = document.getElementById("date-set");
+    dateSet.hidden = false;
+    gsap.fromTo(
+      dateSet,
+      { opacity: 0, y: 24, scale: 0.9 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" }
+    );
   });
 })();

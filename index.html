@@ -25,7 +25,7 @@
 
         <div class="hero-content">
           <h1 class="logo" data-glitch="bitChemistry">
-            <span class="logo-bit">bit</span><span class="logo-chem">Chemistry</span>
+            <span class="logo-bit">bit</span><span class="logo-chem"><span>C</span><span>h</span><span>e</span><span>m</span><span>i</span><span>s</span><span>t</span><span>r</span><span>y</span></span>
           </h1>
           <p class="tagline" id="tagline"></p>
           <div class="scroll-hint">scroll <span class="arrow">&#8595;</span></div>
@@ -62,7 +62,27 @@
             <button class="btn-choice btn-yes" id="btn-yes">yes &#128156;</button>
             <button class="btn-choice btn-no" id="btn-no">no</button>
           </div>
-          <p class="decision-result" id="decision-result"></p>
+
+          <div class="scheduler" id="scheduler" hidden>
+            <p class="scheduler-title">&#9889; it's a match! lock in your date:</p>
+            <div class="scheduler-fields">
+              <label class="field">
+                <span>date</span>
+                <input type="date" id="date-input" />
+              </label>
+              <label class="field">
+                <span>time</span>
+                <input type="time" id="time-input" />
+              </label>
+            </div>
+            <button class="btn-choice btn-yes" id="btn-confirm">confirm date</button>
+            <p class="scheduler-confirm" id="scheduler-confirm"></p>
+
+            <div class="date-set" id="date-set" hidden>
+              <img class="date-set-gif" src="assets/heart-heartbeat.gif" alt="excited mouse melting with love" />
+              <p class="cant-wait">i cant wait</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
