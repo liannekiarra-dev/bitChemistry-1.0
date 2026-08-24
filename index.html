@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bitChemistry // date scheduler</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Three.js / WebGL neon background lives here -->
+  <canvas id="bg-webgl"></canvas>
+
+  <!-- scanline + vignette overlay for CRT / cyberpunk feel -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <main>
+    <!-- ===================== SECTION 1 : HERO / LOGO ===================== -->
+    <section class="panel hero" id="hero">
+      <div class="frame frame--glow">
+        <!-- Matter.js physics boxes assemble here -->
+        <canvas id="physics-canvas"></canvas>
+
+        <div class="hero-content">
+          <h1 class="logo" data-glitch="bitChemistry">
+            <span class="logo-bit">bit</span><span class="logo-chem">Chemistry</span>
+          </h1>
+          <p class="tagline" id="tagline"></p>
+          <div class="scroll-hint">scroll <span class="arrow">&#8595;</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 2 : ABOUT ===================== -->
+    <section class="panel about" id="about">
+      <div class="frame frame--glow">
+        <div class="about-content">
+          <p class="eyebrow">about</p>
+          <h2 class="about-title">bitChemistry</h2>
+          <p class="about-body" id="about-body" data-text="bitChemistry is a date scheduler that is built to schedule activities for two people. It is a simple and playful web app project with a cyberpunk theme and futuristic aesthetic"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION 3 : ACTIVITY RANDOMIZER (React + Framer Motion) ===================== -->
+    <section class="panel randomizer" id="randomizer">
+      <div class="frame frame--hud">
+        <span class="hud-tab">activity ramdomizer</span>
+        <div id="randomizer-root"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>bitChemistry</span> &middot; a playful cyberpunk date scheduler
+  </footer>
+
+  <!-- ================= LIBS via CDN ================= -->
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Matter.js physics -->
+  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
+
+  <!-- ES module import map: Three.js + React + Framer Motion -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+      "react": "https://esm.sh/react@18.3.1",
+      "react-dom": "https://esm.sh/react-dom@18.3.1",
+      "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+      "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+      "framer-motion": "https://esm.sh/framer-motion@11.11.17?external=react,react-dom",
+      "htm": "https://esm.sh/htm@3.1.1"
+    }
+  }
+  </script>
+  <script type="module" src="js/background.js"></script>
+  <script src="js/physics.js"></script>
+  <script src="js/main.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
