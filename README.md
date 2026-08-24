@@ -18,16 +18,6 @@ Behind everything is a **Three.js + WebGL** cyberpunk scene: an infinite neon gr
 - **GSAP + ScrollTrigger** — typewriter, scroll reveals, glitch
 - **HTML5 + CSS** — no build step; React/Three/Framer Motion all load via ESM import maps from CDN
 
-## Run it
-
-ES modules + import maps need to be served over HTTP (opening the file directly won't load Three.js). From this folder:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open <http://localhost:8000> and scroll through the three sections.
-
 ## Files
 
 ```
