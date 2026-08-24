@@ -172,8 +172,9 @@
       ease: "power3.out",
     });
     btnNo.textContent = NO_LABELS[Math.min(noCount, NO_LABELS.length - 1)];
-    // ...and make "yes" more tempting each time
-    gsap.to(btnYes, { scale: 1 + noCount * 0.14, duration: 0.28, ease: "back.out(2)" });
+    // ...and make "yes" more tempting each time (capped so it never overlaps other text)
+    const yesScale = Math.min(1.6, 1 + noCount * 0.12);
+    gsap.to(btnYes, { scale: yesScale, duration: 0.28, ease: "back.out(2)" });
   }
 
   // dodges whether you hover it or (somehow) manage to click it
@@ -237,7 +238,7 @@
     );
     gsap.to(btnConfirm, { scale: "+=0.15", duration: 0.2, yoyo: true, repeat: 1 });
 
-    // reveal the excited gif + "i cant wait"
+    // reveal the excited gif + "i cant wait" — once the date + time is confirmed
     const dateSet = document.getElementById("date-set");
     dateSet.hidden = false;
     gsap.fromTo(

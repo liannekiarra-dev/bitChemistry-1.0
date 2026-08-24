@@ -109,6 +109,25 @@ main { position: relative; z-index: 1; }
   pointer-events: none;
   text-align: center;
 }
+/* soft dark scrim so the logo reads clearly over the coloured blocks */
+.hero-content::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(78%, 760px);
+  height: min(56%, 300px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.72),
+    rgba(0, 0, 0, 0.4) 55%,
+    transparent 78%
+  );
+  filter: blur(8px);
+  z-index: -1;
+  pointer-events: none;
+}
 
 .logo {
   font-family: var(--font-mono);
@@ -118,12 +137,18 @@ main { position: relative; z-index: 1; }
   line-height: 1;
   position: relative;
 }
-.logo-bit { color: #ffffff; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+.logo-bit {
+  color: #ffffff;
+  text-shadow: 0 0 4px #000, 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 14px rgba(255, 255, 255, 0.6);
+}
 
 /* alternating neon colours across the letters of "Chemistry" */
+/* dark outline layers keep the letters crisp & readable over the coloured blocks */
 .logo-chem span {
   color: currentColor;
-  text-shadow: 0 0 10px currentColor, 0 0 26px currentColor;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 0 4px #000, 0 2px 10px rgba(0, 0, 0, 0.9),
+    0 0 12px currentColor, 0 0 26px currentColor;
 }
 .logo-chem span:nth-child(5n + 1) { color: var(--cyan); }
 .logo-chem span:nth-child(5n + 2) { color: var(--magenta); }
@@ -389,7 +414,7 @@ main { position: relative; z-index: 1; }
   font-size: clamp(1.8rem, 5vw, 3.2rem);
   font-weight: 800;
   color: #ffffff;
-  margin: 0.2em 0 1.4em;
+  margin: 0.2em 0 2.2em;
   text-shadow: 0 0 18px rgba(47, 168, 255, 0.5);
 }
 .decision-buttons {
@@ -399,7 +424,9 @@ main { position: relative; z-index: 1; }
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  min-height: 4rem;
+  /* leaves room for the "yes" button to grow (max ~1.6x) without overlapping */
+  min-height: 5.5rem;
+  margin: 1.5rem 0;
 }
 .btn-choice {
   font-family: var(--font-mono);
