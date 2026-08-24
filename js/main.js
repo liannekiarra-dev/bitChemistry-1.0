@@ -128,4 +128,77 @@
     duration: 0.9,
     ease: "power3.out",
   });
+
+  // ---------------- DECISION: the un-clickable "no" ----------------
+  gsap.from("#decision .frame", {
+    scrollTrigger: { trigger: "#decision", start: "top 70%" },
+    y: 60,
+    opacity: 0,
+    duration: 0.9,
+    ease: "power3.out",
+  });
+
+  const btnNo = document.getElementById("btn-no");
+  const btnYes = document.getElementById("btn-yes");
+  const decisionResult = document.getElementById("decision-result");
+
+  const NO_LABELS = [
+    "no",
+    "are you sure?",
+    "really?",
+    "think again",
+    "the boxes already shipped",
+    "don't be shy",
+    "you know you want to",
+    "resistance is futile",
+    "one more chance...",
+    "just say yes 🙃",
+    "pretty please 💗",
+  ];
+  let noCount = 0;
+  let noScale = 1;
+
+  function dodge() {
+    noCount++;
+    // fling the button to a random nearby spot and shrink it
+    const dx = (Math.random() - 0.5) * 320;
+    const dy = (Math.random() - 0.5) * 180;
+    noScale = Math.max(0.35, noScale - 0.07);
+    gsap.to(btnNo, {
+      x: dx,
+      y: dy,
+      scale: noScale,
+      rotation: (Math.random() - 0.5) * 30,
+      duration: 0.28,
+      ease: "power3.out",
+    });
+    btnNo.textContent = NO_LABELS[Math.min(noCount, NO_LABELS.length - 1)];
+    // ...and make "yes" more tempting each time
+    gsap.to(btnYes, { scale: 1 + noCount * 0.14, duration: 0.28, ease: "back.out(2)" });
+  }
+
+  // dodges whether you hover it or (somehow) manage to click it
+  btnNo.addEventListener("mouseenter", dodge);
+  btnNo.addEventListener("click", (e) => {
+    e.preventDefault();
+    dodge();
+  });
+  btnNo.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    dodge();
+  });
+
+  btnYes.addEventListener("click", () => {
+    decisionResult.textContent = "⚡ it's a match! scroll up and randomize your date 💘";
+    gsap.fromTo(
+      decisionResult,
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2.2)" }
+    );
+    gsap.to(btnYes, { scale: "+=0.25", duration: 0.25, yoyo: true, repeat: 1, ease: "power2.out" });
+    // hide the (tiny, defeated) "no" button
+    gsap.to(btnNo, { opacity: 0, scale: 0, duration: 0.4, ease: "power2.in" });
+    logo && logo.classList.add("glitching");
+    setTimeout(() => logo && logo.classList.remove("glitching"), 400);
+  });
 })();

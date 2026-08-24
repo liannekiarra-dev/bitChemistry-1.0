@@ -368,6 +368,64 @@ main { position: relative; z-index: 1; }
 }
 .randomize-btn:hover { box-shadow: 0 0 28px rgba(52, 255, 176, 0.9); }
 
+/* ---------- DECISION (the big question) ---------- */
+.decision-content {
+  padding: clamp(2.5rem, 8vw, 5rem);
+  text-align: center;
+  min-height: clamp(320px, 46vh, 460px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.decision-title {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0.2em 0 1.4em;
+  text-shadow: 0 0 18px rgba(47, 168, 255, 0.5);
+}
+.decision-buttons {
+  position: relative;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 4rem;
+}
+.btn-choice {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 2.4rem;
+  cursor: pointer;
+  will-change: transform;
+}
+.btn-yes {
+  color: #04121a;
+  background: var(--green-bright);
+  box-shadow: 0 0 16px rgba(52, 255, 176, 0.6);
+}
+.btn-yes:hover { box-shadow: 0 0 32px rgba(52, 255, 176, 0.95); }
+.btn-no {
+  color: #ffffff;
+  background: transparent;
+  border: 2px solid var(--magenta);
+  box-shadow: 0 0 14px rgba(255, 94, 230, 0.5);
+}
+.decision-result {
+  margin-top: 2rem;
+  min-height: 1.6em;
+  font-size: clamp(1rem, 2.6vw, 1.5rem);
+  font-weight: 700;
+  color: var(--green-bright);
+  text-shadow: 0 0 16px rgba(52, 255, 176, 0.7);
+}
+
 /* ---------- footer ---------- */
 .footer {
   position: relative;
